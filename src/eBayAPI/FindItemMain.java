@@ -11,8 +11,9 @@ public class FindItemMain {
 		FindItem fi = new FindItem();
 		List<SearchItem> lisres = fi.findItem(args[0],Integer.valueOf(args[1]));
 		for(SearchItem item:lisres){
-			System.out.println(item.getTitle());
-			System.out.println(item.getSellingStatus().getCurrentPrice().getValue());
+			
+					
+			System.out.println("eBay" +  " - "  + item.getTitle() +  " - "  + item.getSellingStatus().getCurrentPrice().getValue() + item.getSellingStatus().getCurrentPrice().getCurrencyId());
 		}
 	}
 

@@ -8,7 +8,7 @@ public class FindItemGoogleShoppingMain {
 	 */
 	public static void main(String[] args) throws Exception {
 		FindItemGoogleShopping fi =  new FindItemGoogleShopping();
-		fi.findItemGoogleShopping("Samsung Galaxy");
+		fi.findItemGoogleShopping("Samsung Galaxy 2");
 
 	}
 
