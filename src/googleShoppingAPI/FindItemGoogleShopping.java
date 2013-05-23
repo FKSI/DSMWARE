@@ -31,7 +31,7 @@ public class FindItemGoogleShopping {
 	public static void findItemGoogleShopping (String keywords) throws Exception{
 
 	try {
-			JSONObject json = new JSONObject(readUrl("https://www.googleapis.com/shopping/search/v1/public/products?key=AIzaSyA60ZmMU9vLguggfj35Wp2onuPfM894TWI&country=US&q=" + keywords.replace(" ", "+") ));
+			JSONObject json = new JSONObject(readUrl("https://www.googleapis.com/shopping/search/v1/public/products?key=AIzaSyA60ZmMU9vLguggfj35Wp2onuPfM894TWI&country=US&q=" + keywords.replace(" ", "+")));
 
 			JSONArray items = json.getJSONArray("items");
 
@@ -41,8 +41,14 @@ public class FindItemGoogleShopping {
 				JSONArray inventories = products.getJSONArray("inventories");
 				JSONObject author = products.getJSONObject("author");
 				JSONObject prices = (JSONObject) inventories.get(0);
-				System.out.println(author.get("name") + " - " + products.get("title").toString() + " - " +  prices.get("price") + prices.get("currency"));
-
+			
+				if(!author.get("name").toString().contains("eBay")){
+					System.out.println(author.get("name") + " - " + products.get("title").toString() + " - " +  prices.get("price") + prices.get("currency"));
+				}
+				
+				
+				
+		
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
