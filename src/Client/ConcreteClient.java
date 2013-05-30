@@ -43,8 +43,15 @@ public class ConcreteClient {
 			   }
 		      out.println(searchedItem);
 		      try{
-		    	     String line = in.readLine();
-		    	     System.out.println("Text received: " + line);
+		    	  
+		    	     String line = null;
+		    	     while ((line = in.readLine()) != null) {
+		    	    	   System.out.println(line);
+		    	    	   System.out.println("THIS IS FROM THE SERVER!");
+		    	    	}
+		    	     
+		    	     
+		    	     //System.out.println("Text received: " + line);
 		    	   } catch (IOException e){
 		    	     System.out.println("Read failed");
 		    	     

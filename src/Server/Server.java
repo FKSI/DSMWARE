@@ -59,12 +59,15 @@ public class Server {
 				line = in.readLine();
 				apiconn = new GoogleShoppingAPIConnector();
 				res = apiconn.getItems(line);
-				apiconn = new eBayAPIConnector();
-				res.addAll(apiconn.getItems(line));
+				//apiconn = new eBayAPIConnector();
+				//res.addAll(apiconn.getItems(line));
 				for (int i = 0; i < res.size(); i++) 
 				{
-					System.out.println(res.get(i));
+					out.println(res.get(i));
 				}
+				out.flush();
+				
+				
 				}
 				
 			
