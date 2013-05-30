@@ -53,10 +53,6 @@ public class FindItemGoogleShopping {
 			e.printStackTrace();
 		}
 	
-	/*for (int i = 0; i < res.size(); i++) 
-	{
-		System.out.println(res.get(i));
-	}*/
 	return res;
 	}
 

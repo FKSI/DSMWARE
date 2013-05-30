@@ -15,7 +15,7 @@ public class eBayAPIConnector extends APIConnector {
 		List<String> results = new ArrayList<String>();
 		
 		for(SearchItem item:lisres){
-			results.add(item.getTitle() +  " - "  + item.getSellingStatus().getCurrentPrice().getValue() + item.getSellingStatus().getCurrentPrice().getCurrencyId());
+			results.add("FROM EBAY"+item.getTitle() +  " - "  + item.getSellingStatus().getCurrentPrice().getValue() + item.getSellingStatus().getCurrentPrice().getCurrencyId());
 		}
 		return results;
 	}

@@ -28,8 +28,8 @@ public class ConcreteClient {
 			}
 			
 			 try{
-			     socket = new Socket("localhost", 4321);
-			     System.out.println("Client connected on port 4321");
+			     socket = new Socket("localhost", 4444);
+			     System.out.println("Client connected on port 4444");
 			     out = new PrintWriter(socket.getOutputStream(), 
 			                 true);
 			     in = new BufferedReader(new InputStreamReader(

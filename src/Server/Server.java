@@ -2,6 +2,7 @@ package Server;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 
@@ -19,15 +20,16 @@ public class Server {
 	
 	public void listenSocket() throws Exception 
 	{
+		List<String> res = new ArrayList<String>();
 		try 
 		{
-			server = new ServerSocket(4321);
-			System.out.println("Listening on port 4321");
+			server = new ServerSocket(4444);
+			System.out.println("Listening on port 4444");
 			
 		}
 		catch (IOException e) 
 		{
-			System.out.println("Could not listen on port 4321");
+			System.out.println("Could not listen on port 4444");
 			System.out.println(e.getMessage());
 			System.exit(-1);
 		}
@@ -36,7 +38,7 @@ public class Server {
 		}
 		catch (IOException e) 
 		{
-			System.out.println ("Accept failed: 4321");
+			System.out.println ("Accept failed: 4444");
 			System.exit(-1);
 		}
 		
@@ -56,9 +58,15 @@ public class Server {
 			{
 				line = in.readLine();
 				apiconn = new GoogleShoppingAPIConnector();
-				apiconn.getItems(line);
+				res = apiconn.getItems(line);
+				apiconn = new eBayAPIConnector();
+				res.addAll(apiconn.getItems(line));
+				for (int i = 0; i < res.size(); i++) 
+				{
+					System.out.println(res.get(i));
 				}
-				//System.out.println("Server received: "+ line);
+				}
+				
 			
 			catch (IOException e)
 			{
