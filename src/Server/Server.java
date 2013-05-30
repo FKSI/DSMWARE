@@ -57,18 +57,22 @@ public class Server {
 			try 
 			{
 				line = in.readLine();
+				if (!line.isEmpty()) {
 				apiconn = new GoogleShoppingAPIConnector();
 				res = apiconn.getItems(line);
-				//apiconn = new eBayAPIConnector();
-				//res.addAll(apiconn.getItems(line));
+				apiconn = new BestBuyAPIConnector();
+				res.addAll(apiconn.getItems(line));
 				for (int i = 0; i < res.size(); i++) 
 				{
 					out.println(res.get(i));
 				}
+				out.println("\u0004");
 				out.flush();
 				
-				
 				}
+				else break;
+				
+			}
 				
 			
 			catch (IOException e)
