@@ -15,6 +15,7 @@ public class Server {
 	PrintWriter out = null;
 	String line = null;
 	BufferedReader in = null;
+	APIConnector apiconn;
 	
 	public void listenSocket() throws Exception 
 	{
@@ -54,7 +55,8 @@ public class Server {
 			try 
 			{
 				line = in.readLine();
-				FindItemGoogleShopping.findItemGoogleShopping(line);
+				apiconn = new GoogleShoppingAPIConnector();
+				apiconn.getItems(line);
 				}
 				//System.out.println("Server received: "+ line);
 			
