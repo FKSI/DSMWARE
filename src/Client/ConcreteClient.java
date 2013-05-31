@@ -26,7 +26,7 @@ public class ConcreteClient {
 		}
 		catch(IOException e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		try{
@@ -70,7 +70,7 @@ public class ConcreteClient {
 			Desktop.getDesktop().browse(f.toURI());
 			
 			in.close();
-
+			socket.close();
 			//System.out.println("Text received: " + line);
 		} catch (IOException e){
 			System.out.println("Read failed");
@@ -78,12 +78,7 @@ public class ConcreteClient {
 			// System.exit(1);
 		}		      
 
-		try {
-			socket.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	 
+		
 
 	}
 }

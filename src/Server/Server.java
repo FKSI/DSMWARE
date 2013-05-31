@@ -17,15 +17,15 @@ public class Server {
 	String line = null;
 	BufferedReader in = null;
 	APIConnector apiconn;
-	
-	public void listenSocket() throws Exception 
+
+	public void listenSocket() throws IOException 
 	{
 		List<String> res = new ArrayList<String>();
 		try 
 		{
 			server = new ServerSocket(4444);
 			System.out.println("Listening on port 4444");
-			
+
 		}
 		catch (IOException e) 
 		{
@@ -41,44 +41,44 @@ public class Server {
 			System.out.println ("Accept failed: 4444");
 			System.exit(-1);
 		}
-		
+
 		try 
 		{
-			in = new BufferedReader (new InputStreamReader(client.getInputStream()));
+			this.in = new BufferedReader (new InputStreamReader(client.getInputStream()));
 			out = new PrintWriter (client.getOutputStream(), true);
 		}
 		catch (IOException e) 
 		{
 			System.out.println ("Read failed");
 			System.exit(-1);
-			}
+		}
 		while (true)
 		{
 			try 
 			{
-				line = in.readLine();
-				if (!line.isEmpty()) {
-				apiconn = new GoogleShoppingAPIConnector();
-				res = apiconn.getItems(line);
-				apiconn = new BestBuyAPIConnector();
-				res.addAll(apiconn.getItems(line));
-				for (int i = 0; i < res.size(); i++) 
-				{
-					out.println(res.get(i));
-				}
-				out.println("\u0004");
-				out.flush();
-				
-				}
-				else break;
-				
+				line = this.in.readLine();
+					apiconn = new GoogleShoppingAPIConnector();
+					res = apiconn.getItems(line);
+					apiconn = new BestBuyAPIConnector();
+					res.addAll(apiconn.getItems(line));
+					for (int i = 0; i < res.size(); i++) 
+					{
+						out.println(res.get(i));
+					}
+					
+					out.println("\u0004");
+					out.flush();
+
 			}
-				
-			
-			catch (IOException e)
+
+
+			catch (Exception e)
 			{
-				e.printStackTrace();
-				
+				//e.printStackTrace();
+				server.close();
+				listenSocket();
+				//System.out.println(line);
+
 			}
 		}
 	}
