@@ -10,8 +10,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FindItemGoogleShopping {
+/**
+ * 
+ * @author Francois KY
+ * Eurecom DSMWare Project 2013 - Andrea SMETKO - Francois KY
+ * Professor Y.ROUDIER
+ *
+ */
 
+public class FindItemGoogleShopping {
+	
+	/**
+	 * Returns a string containing the result of the HTTP request given a specified URL.
+	 * The urlString argument should be string.
+	 * 
+	 * @param urlString
+	 * @throws Exception
+	 */
 	private static String readUrl(String urlString) throws Exception {
 		BufferedReader reader = null;
 		try {
@@ -29,7 +44,17 @@ public class FindItemGoogleShopping {
 				reader.close();
 		}
 	}
-
+	
+	/**
+	 * Returns a given list of string containing the name and the price of each find items.
+	 * The outlet name is hardcoded and the currency as well.
+	 * This method is fitted JSON parser for BestBuy API.
+	 * 
+	 * 
+	 * @param keywords string matching the user's input
+	 * @return a list of string as the result of Google Shopping API lookup
+	 * @throws Exception
+	 */
 
 	public static List<String> findItemGoogleShopping (String keywords) throws Exception{
 		List<String> res = new ArrayList<String>();

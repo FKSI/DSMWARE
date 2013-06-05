@@ -10,8 +10,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 
+ * @author Francois KY
+ * Eurecom DSMWare Project 2013 - Andrea SMETKO - Francois KY
+ * Professor Y.ROUDIER
+ *
+ */
 public class FindItemBestBuy {
 
+	/**
+	 * Returns a string containing the result of the HTTP request given a specified URL.
+	 * The urlString argument should be string.
+	 * 
+	 * @param urlString
+	 * @throws Exception
+	 */
 	private static String readUrl(String urlString) throws Exception {
 		BufferedReader reader = null;
 		try {
@@ -31,6 +45,16 @@ public class FindItemBestBuy {
 	}
 
 
+	/**
+	 * Returns a given list of string containing the name and the price of each find items.
+	 * The outlet name is hardcoded and the currency as well.
+	 * This method is fitted JSON parser for BestBuy API.
+	 * 
+	 * 
+	 * @param keywords string matching the user's input
+	 * @return a list of string as the result of Best Buy API lookup
+	 * @throws Exception
+	 */
 	public static List<String> findItemBestBuyShopping (String keywords) throws Exception{
 		List<String> res = new ArrayList<String>();
 	try {

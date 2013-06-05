@@ -9,9 +9,24 @@ import com.ebay.services.finding.FindingServicePortType;
 import com.ebay.services.finding.PaginationInput;
 import com.ebay.services.finding.SearchItem;
 
+/**
+ * 
+ * @author Francois KY
+ * Eurecom DSMWare Project 2013 - Andrea SMETKO - Francois KY
+ * Professor Y.ROUDIER
+ *
+ */
 
 public class FindItem {
 
+	/**
+	 * Returns the list of string containing the items matching the input of the user.
+	 * Each string will contain the outler/seller name, the price and the currency.
+	 * 
+	 * @param keywords 
+	 * @param nresults this value allows a control of number of results the eBayAPI should return.
+	 * @return a list of string
+	 */
 	public List<SearchItem> findItem(String keywords,int nresults){
 		
 		try {
