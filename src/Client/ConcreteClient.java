@@ -6,8 +6,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConcreteClient {
+public class ConcreteClient extends AbstractClient{
 
+	Socket socket = null;
+	PrintWriter out = null;
+	BufferedReader in = null;
+	String searchedItem = null;
+	String line = null;
 	/**
 	 * @param args
 	 * @throws InterruptedException
@@ -16,20 +21,13 @@ public class ConcreteClient {
 	 * @param args
 	 * @throws InterruptedException
 	 */
-	public static void main (String args[]) throws InterruptedException
-	{		      
-
-		Socket socket = null;
-		PrintWriter out = null;
-		BufferedReader in = null;
+	
+	public void getResults(int socketNumber)
+	{
 		System.out.println("Enter the item you want to search for : ");
-		String searchedItem = null;
-		String line = null;
-
 		try{
 			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 			searchedItem = bufferRead.readLine();
-
 			System.out.println(searchedItem);
 		}
 		catch(IOException e)
@@ -38,22 +36,26 @@ public class ConcreteClient {
 		}
 
 		try{
-			socket = new Socket("localhost", 4444);
-			System.out.println("Client connected on port 4444");
+			socket = new Socket("localhost", socketNumber);
+			System.out.println("Client connected on port " + String.valueOf(socketNumber));
 			out = new PrintWriter(socket.getOutputStream(), 
 					true);
 			in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
 		} catch (UnknownHostException e) {
-			System.out.println("Unknown host: kq6py");
+			//System.out.println("Unknown host: kq6py");
 			System.exit(1);
 		} catch  (IOException e) {
 			System.out.println("No I/O");
 			System.exit(1);
 		}
 		out.println(searchedItem);
-		try{
-
+		
+	}
+	
+	public void printResults()
+	{		
+				try{
 
 			File f = new File("index.html");
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
@@ -105,9 +107,14 @@ public class ConcreteClient {
 			System.out.println("Read failed");
 
 			// System.exit(1);
-		}		      
-
+		}
 		
+	}
+	public static void main (String args[]) throws InterruptedException
+	{
+		ConcreteClient cc = new ConcreteClient();
+		cc.getResults(4444);
+		cc.printResults();
 
 	}
 }
