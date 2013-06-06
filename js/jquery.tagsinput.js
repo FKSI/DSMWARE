@@ -219,10 +219,10 @@
 			}
 	
             var containerClass = $('#'+id).attr('class').replace('tagsinput', '');
-			var markup = '<div id="'+id+'_tagsinput" class="tagsinput '+containerClass+'"><div class="tagsinput-add-container" id="'+id+'_addTag"><div class="tagsinput-add"></div>';
+			var markup = '<div id="'+id+'_tagsinput" class="tagsinput '+containerClass+'"><div class="tagsinput-add-container" id="'+id+'_addTag">';
 			
 			if (settings.interactive) {
-				markup = markup + '<input id="'+id+'_tag" value="" data-default="'+settings.defaultText+'" />';
+				markup = markup + '<input  DISABLED id="'+id+'_tag" value="" data-default="'+settings.defaultText+'" />';
 			}
 			
 			markup = markup + '</div></div>';
@@ -231,7 +231,7 @@
 
 			$(data.holder).css('width',settings.width);
 			$(data.holder).css('min-height',settings.height);
-			$(data.holder).css('height','100%');
+			$(data.holder).css('height','5%');
 	
 			if ($(data.real_input).val()!='') { 
 				$.fn.tagsInput.importTags($(data.real_input),$(data.real_input).val());
@@ -321,7 +321,7 @@
 				//Removes the not_valid class when user changes the value of the fake input
 				if(data.unique) {
 				    $(data.fake_input).keydown(function(event){
-				        if(event.keyCode == 8 || String.fromCharCode(event.which).match(/\w+|[áéíóúÁÉÍÓÚñÑ,/]+/)) {
+				        if(event.keyCode == 8 || String.fromCharCode(event.which).match(/\w+|[Ã¡Ã©Ã­Ã³ÃºÃ�Ã‰Ã�Ã“ÃšÃ±Ã‘,/]+/)) {
 				            $(this).removeClass('not_valid');
 				        }
 				    });
