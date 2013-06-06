@@ -2,6 +2,13 @@ package Client;
 import java.awt.Desktop;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Map;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -71,7 +78,7 @@ public class ConcreteClient extends AbstractClient{
 			bw.write("<div class='demo-headline'><h1 class='demo-logo'>DSMWare Project - Spring 2013<small>SMETKO Andrea - KY Francois</small></h1></div>");
 			bw.write("<div class='container'>");
 			bw.write("<div class='span11'>");
-			bw.write("<h3 class='demo-panel-title'>You search is: </h3>");
+			bw.write("<h3 class='demo-panel-title'>Your search is: </h3>");
 			bw.write("<input name='tagsinput' id='tagsinput' class='tagsinput' value='" + searchedItem.replace(' ', ',') + "' />");
 			bw.write("</div>");
 			bw.write("<center><div class='span11'><a href='#Bot' class='btn btn-large btn-block btn-info'>Go to the bottom of the list </a></div></center>");
@@ -80,15 +87,29 @@ public class ConcreteClient extends AbstractClient{
 			bw.write("</br>");
 			bw.write("<div class='span11'>");
 			bw.write("<div class='demo-text-box prl'>");
-
+			List<Float> list = new ArrayList<Float>();
+			Map<Float, String> map = new HashMap<Float, String>();
+			
 			while (!(line = in.readLine()).equals("\u0004")) {
-
-				bw.write("<div class='fui-radio-unchecked'></div>");
-				bw.write(" "+line);
-				bw.write("</br>");
-				bw.write("</br>");
+				
+				map.put(Float.valueOf(line.split("-")[line.split("-").length-2]), line);
+				
 				//bw.newLine();
 			}
+			
+			
+			for (Float str : map.keySet()) {
+				 list.add(str);
+			}
+			
+			Collections.sort(list);
+			for (Float str : list) {
+				bw.write("<div class='fui-radio-unchecked'></div>");
+				bw.write(" " + map.get(str) );
+				bw.write("</br>");
+				bw.write("</br>");
+			}
+	
 
 			bw.write("</div>");
 

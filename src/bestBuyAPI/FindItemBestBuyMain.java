@@ -18,7 +18,7 @@ public class FindItemBestBuyMain {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		List<String> res = FindItemBestBuy.findItemBestBuyShopping("Samsung Galaxy S III 32Gb");
+		List<String> res = FindItemBestBuy.findItemBestBuyShopping("Sony Xperia");
 		for (String r : res ){
 			System.out.println(r);
 		}

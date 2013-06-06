@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -59,7 +60,6 @@ public class FindItemBestBuy {
 		List<String> res = new ArrayList<String>();
 	try {
 			JSONObject json = new JSONObject(readUrl("http://api.remix.bestbuy.com/v1/products(name=" + keywords.replace(" ", "*%20").toString() + "*"+ ")?show=name,regularPrice&format=json&apiKey=ztqu8spnt3b8gfkg6f88m2f9"));
-
 			JSONArray items = json.getJSONArray("products");
 			
 			for (int i = 0; i < items.length(); i++) {  
@@ -70,7 +70,10 @@ public class FindItemBestBuy {
 				JSONObject prices = (JSONObject) inventories.get(0);
 				System.out.println(author.get("name") + " - " + products.get("title").toString() + " - " +  prices.get("price") + prices.get("currency"));*/
 				
-				res.add("BestBuy" + " - " + item.get("name") + " - " + item.get("regularPrice") + "USD");
+				
+				res.add("BestBuy" + " - " + item.get("name") + " - " + item.get("regularPrice") + " - USD");
+				
+			
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

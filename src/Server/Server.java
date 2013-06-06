@@ -3,6 +3,8 @@ package Server;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.io.IOException;
 
@@ -56,13 +58,17 @@ public class Server {
 		{
 			try 
 			{
-				line = this.in.readLine();
+					line = this.in.readLine();
+					
 					apiconn = new GoogleShoppingAPIConnector();
 					res = apiconn.getItems(line);
 					apiconn = new BestBuyAPIConnector();
 					res.addAll(apiconn.getItems(line));
+					Collections.sort(res);
+					
 					for (int i = 0; i < res.size(); i++) 
 					{
+						
 						out.println(res.get(i));
 					}
 					
