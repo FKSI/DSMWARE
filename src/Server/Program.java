@@ -5,9 +5,7 @@ public class Program {
 		Server s = new Server();
 		try {
 			s.listenSocket();
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

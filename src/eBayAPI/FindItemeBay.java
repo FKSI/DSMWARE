@@ -17,7 +17,7 @@ import com.ebay.services.finding.SearchItem;
  *
  */
 
-public class FindItem {
+public class FindItemeBay {
 
 	/**
 	 * Returns the list of string containing the items matching the input of the user.

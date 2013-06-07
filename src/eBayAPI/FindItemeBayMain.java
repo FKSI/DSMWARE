@@ -12,7 +12,7 @@ import com.ebay.services.finding.SearchItem;
  *
  */
 
-public class FindItemMain {
+public class FindItemeBayMain {
 
 	/**
 	 * Print the result of a query through the eBay API. This class is useful to test the eBay API alone.
@@ -21,7 +21,7 @@ public class FindItemMain {
 	 */
 	public static void main(String[] args) {
 		
-		FindItem fi = new FindItem();
+		FindItemeBay fi = new FindItemeBay();
 		List<SearchItem> lisres = fi.findItem(args[0],Integer.valueOf(args[1]));
 		for(SearchItem item:lisres){
 					

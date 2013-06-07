@@ -1,17 +1,20 @@
 package Client;
+
 import java.awt.Desktop;
-import java.io.*;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ConcreteClient extends AbstractClient{
 
@@ -20,6 +23,9 @@ public class ConcreteClient extends AbstractClient{
 	BufferedReader in = null;
 	String searchedItem = null;
 	String line = null;
+	List<Float> list = new ArrayList<Float>();
+	Map<Float, String> map = new HashMap<Float, String>();
+
 	/**
 	 * @param args
 	 * @throws InterruptedException
@@ -39,7 +45,7 @@ public class ConcreteClient extends AbstractClient{
 		}
 		catch(IOException e)
 		{
-			//e.printStackTrace();
+			
 		}
 
 		try{
@@ -50,7 +56,6 @@ public class ConcreteClient extends AbstractClient{
 			in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
 		} catch (UnknownHostException e) {
-			//System.out.println("Unknown host: kq6py");
 			System.exit(1);
 		} catch  (IOException e) {
 			System.out.println("No I/O");
@@ -66,6 +71,7 @@ public class ConcreteClient extends AbstractClient{
 
 			File f = new File("index.html");
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+			
 			bw.write("<html>");
 			bw.write("<head>");
 			bw.write("<meta charset='utf-8'>");
@@ -87,54 +93,37 @@ public class ConcreteClient extends AbstractClient{
 			bw.write("</br>");
 			bw.write("<div class='span11'>");
 			bw.write("<div class='demo-text-box prl'>");
-			List<Float> list = new ArrayList<Float>();
-			Map<Float, String> map = new HashMap<Float, String>();
-			
+		
 			while (!(line = in.readLine()).equals("\u0004")) {
-				
 				map.put(Float.valueOf(line.split("-")[line.split("-").length-2]), line);
-				
-				//bw.newLine();
 			}
-			
-			
+
 			for (Float str : map.keySet()) {
-				 list.add(str);
+				list.add(str);
 			}
-			
+
 			Collections.sort(list);
 			for (Float str : list) {
 				bw.write("<div class='fui-radio-unchecked'></div>");
-				bw.write(" " + map.get(str) );
+				bw.write(" " + map.get(str));
 				bw.write("</br>");
 				bw.write("</br>");
 			}
-	
 
 			bw.write("</div>");
-
-
 			bw.write("</div>");
 			bw.write("<center><div class='span11'><a href='#Top' class='btn btn-large btn-block btn-primary'>Go to the top of the list </a></div></center>");
 			bw.write("</div>");
-
-
 			bw.write("<a name='Bot'></a>");
 			bw.write("<script src='js/jquery-1.8.3.min.js'></script><script src='js/jquery-ui-1.10.3.custom.min.js'></script><script src='js/bootstrap.min.js'></script><script src='js/bootstrap-select.js'></script><script src='js/bootstrap-switch.js'></script><script src='js/jquery.tagsinput.js'></script><script src='js/application.js'></script>");
-
 			bw.write("</body>");
 			bw.write("</html>");
 			bw.close();
-
 			Desktop.getDesktop().browse(f.toURI());
 
 			in.close();
-			//socket.close();
-			//System.out.println("Text received: " + line);
 		} catch (IOException e){
 			System.out.println("Read failed");
-
-			// System.exit(1);
 		}
 
 	}

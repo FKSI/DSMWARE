@@ -23,9 +23,7 @@ public class FindItemGoogleShoppingMain {
 
 		for(String s : res)
 		{
-
 			System.out.println(s);
-
 		}
 	}
 

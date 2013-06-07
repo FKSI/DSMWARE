@@ -70,9 +70,9 @@ public class FindItemGoogleShopping {
 				JSONArray inventories = products.getJSONArray("inventories");
 				JSONObject author = products.getJSONObject("author");
 				JSONObject prices = (JSONObject) inventories.get(0);
+				
 				res.add(author.get("name") + " - " + products.get("title").toString() + " - " +  prices.get("price") + " - "+ prices.get("currency"));
 				
-
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
