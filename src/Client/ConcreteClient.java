@@ -15,6 +15,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+
+/**
+ * 
+ * @author Andrea SMETKO
+ * Eurecom DSMWare Project 2013 - Andrea SMETKO - Francois KY
+ * Professor Y.ROUDIER
+ *
+ */
+
 
 public class ConcreteClient extends AbstractClient{
 
@@ -30,23 +41,16 @@ public class ConcreteClient extends AbstractClient{
 	 * @param args
 	 * @throws InterruptedException
 	 */
-	/**
-	 * @param args
-	 * @throws InterruptedException
-	 */
 
-	public void getResults(int socketNumber)
+
+	public void getResults(final int socketNumber)
 	{
 		System.out.println("Enter the item you want to search for : ");
 		try{
 			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 			searchedItem = bufferRead.readLine();
-			System.out.println(searchedItem);
 		}
-		catch(IOException e)
-		{
-			
-		}
+		catch(IOException e) {}
 
 		try{
 			socket = new Socket("localhost", socketNumber);
@@ -58,13 +62,23 @@ public class ConcreteClient extends AbstractClient{
 		} catch (UnknownHostException e) {
 			System.exit(1);
 		} catch  (IOException e) {
-			System.out.println("No I/O");
-			System.exit(1);
+			System.out.println("Cannot connect to the server! A new connection will trigger in 5sec ");
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+				  @Override
+				  public void run() {
+					  System.out.println("New connection ");
+					  getResults(socketNumber);
+					  System.out.println("New connection established ");
+				  }
+				}, 5*1000);
 		}
+		
 		out.println(searchedItem);
 
 	}
 
+	
 	public void printResults()
 	{		
 		try{
@@ -127,6 +141,10 @@ public class ConcreteClient extends AbstractClient{
 		}
 
 	}
+	/**
+	 * @param args
+	 * @throws InterruptedException
+	 */
 	public static void main (String args[]) throws InterruptedException
 	{
 		ConcreteClient cc = new ConcreteClient();

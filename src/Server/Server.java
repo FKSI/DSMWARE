@@ -10,6 +10,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
+/**
+ * 
+ * @author Andrea SMETKO
+ * Eurecom DSMWare Project 2013 - Andrea SMETKO - Francois KY
+ * Professor Y.ROUDIER
+ *
+ */
+
 public class Server {
 	ServerSocket server = null;
 	Socket client = null;
@@ -73,7 +82,9 @@ public class Server {
 
 			catch (Exception e)
 			{
+				System.out.println("Closing the server ... ");
 				server.close();
+				System.out.println("Relaunching the server ... ");
 				listenSocket();
 			}
 		}

@@ -3,7 +3,10 @@ package googleShoppingAPI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -75,7 +78,9 @@ public class FindItemGoogleShopping {
 				
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			System.err.println(dateFormat.format(cal.getTime()) + "Something went wrong with the JSON response from Google Shopping API.");
 		}
 	
 	return res;

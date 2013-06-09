@@ -1,5 +1,8 @@
 package eBayAPI;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import com.ebay.services.client.ClientConfig;
 import com.ebay.services.client.FindingServiceClientFactory;
@@ -55,7 +58,9 @@ public class FindItemeBay {
 			return items;
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			System.err.println(dateFormat.format(cal.getTime()) + "Something went wrong with the SOAP response from eBay API.");
 		}
 		return null;
 	}	
