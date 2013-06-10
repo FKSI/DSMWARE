@@ -84,7 +84,7 @@ public class Server {
 			{
 				System.out.println("Closing the server ... ");
 				server.close();
-				System.out.println("Relaunching the server ... ");
+				System.out.println("Restarting the server ... ");
 				listenSocket();
 			}
 		}

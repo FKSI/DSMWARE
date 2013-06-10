@@ -36,7 +36,7 @@ public class ConcreteClient extends AbstractClient{
 	String line = null;
 	List<Float> list = new ArrayList<Float>();
 	Map<Float, String> map = new HashMap<Float, String>();
-
+	final int RELAUNCH_CON = 5000;
 	/**
 	 * @param args
 	 * @throws InterruptedException
@@ -70,8 +70,10 @@ public class ConcreteClient extends AbstractClient{
 					  System.out.println("New connection ");
 					  getResults(socketNumber);
 					  System.out.println("New connection established ");
+					  out.println(searchedItem);
+					  printResults();
 				  }
-				}, 5*1000);
+				}, RELAUNCH_CON);
 		}
 		
 		out.println(searchedItem);
