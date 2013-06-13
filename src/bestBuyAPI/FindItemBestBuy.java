@@ -19,6 +19,7 @@ import org.json.JSONObject;
  * Professor Y.ROUDIER
  *
  */
+
 public class FindItemBestBuy {
 
 	/**

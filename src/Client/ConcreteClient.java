@@ -23,7 +23,7 @@ import java.util.TimerTask;
  * @author Andrea SMETKO
  * Eurecom DSMWare Project 2013 - Andrea SMETKO - Francois KY
  * Professor Y.ROUDIER
- *
+ * Concrete Client - console input, webpage output.
  */
 
 
@@ -37,22 +37,27 @@ public class ConcreteClient extends AbstractClient{
 	List<Float> list = new ArrayList<Float>();
 	Map<Float, String> map = new HashMap<Float, String>();
 	final int RELAUNCH_CON = 5000;
-	/**
-	 * @param args
-	 * @throws InterruptedException
+	
+
+
+	/* 
+	 * Connects to a working server at a given socket number. Sends the search term and retrieves the result.
+	 * @param socketNumber number of the socket the server is listening at
 	 */
-
-
 	public void getResults(final int socketNumber)
 	{
+		
 		System.out.println("Enter the item you want to search for : ");
 		try{
+			//entering the search term
 			BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
 			searchedItem = bufferRead.readLine();
 		}
 		catch(IOException e) {}
 
 		try{
+			
+			//connecting to a server
 			socket = new Socket("localhost", socketNumber);
 			System.out.println("Client connected on port " + String.valueOf(socketNumber));
 			out = new PrintWriter(socket.getOutputStream(), 
@@ -63,6 +68,8 @@ public class ConcreteClient extends AbstractClient{
 			System.exit(1);
 		} catch  (IOException e) {
 			System.out.println("Cannot connect to the server! A new connection will trigger in 5sec ");
+			
+			//waiting and restarting a connection in case of failure
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
 				  @Override
@@ -81,6 +88,9 @@ public class ConcreteClient extends AbstractClient{
 	}
 
 	
+	/** 
+	 * Sorts and prints the results received from the server on an HTML page.
+	 */
 	public void printResults()
 	{		
 		try{
@@ -88,6 +98,7 @@ public class ConcreteClient extends AbstractClient{
 			File f = new File("index.html");
 			BufferedWriter bw = new BufferedWriter(new FileWriter(f));
 			
+			//"design of the output file"
 			bw.write("<html>");
 			bw.write("<head>");
 			bw.write("<meta charset='utf-8'>");
@@ -110,6 +121,7 @@ public class ConcreteClient extends AbstractClient{
 			bw.write("<div class='span11'>");
 			bw.write("<div class='demo-text-box prl'>");
 		
+			//sorting the results
 			while (!(line = in.readLine()).equals("\u0004")) {
 				map.put(Float.valueOf(line.split("-")[line.split("-").length-2]), line);
 			}
@@ -117,8 +129,10 @@ public class ConcreteClient extends AbstractClient{
 			for (Float str : map.keySet()) {
 				list.add(str);
 			}
-
+		
 			Collections.sort(list);
+			
+			//printing the sorted results
 			for (Float str : list) {
 				bw.write("<div class='fui-radio-unchecked'></div>");
 				bw.write(" " + map.get(str));
@@ -143,12 +157,14 @@ public class ConcreteClient extends AbstractClient{
 		}
 
 	}
+
 	/**
 	 * @param args
 	 * @throws InterruptedException
 	 */
 	public static void main (String args[]) throws InterruptedException
 	{
+		
 		ConcreteClient cc = new ConcreteClient();
 		cc.getResults(4444);
 		cc.printResults();
